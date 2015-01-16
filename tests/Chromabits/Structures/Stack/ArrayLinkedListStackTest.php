@@ -22,7 +22,7 @@ class ArrayLinkedListStackTest extends TestCase
 
         $stack->push('hi');
 
-        $this->assertTrue('hi', $stack->top()->getContent());
+        $this->assertEquals('hi', $stack->top()->getContent());
     }
 
     public function testPop()
