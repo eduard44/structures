@@ -44,4 +44,18 @@ interface LinkedListInterface
      * @return \Chromabits\Structures\LinkedList\Node|null
      */
     public function pop();
+
+    /**
+     * Get the first element of the list
+     *
+     * @return \Chromabits\Structures\Interfaces\NodeInterface|null
+     */
+    public function head();
+
+    /**
+     * Get the last element of the list
+     *
+     * @return \Chromabits\Structures\Interfaces\NodeInterface|null
+     */
+    public function tail();
 }

@@ -179,4 +179,24 @@ class ArrayLinkedList implements Flushable, Countable, LinkedListInterface
     {
         return (is_null($this->tail) && is_null($this->head));
     }
+
+    /**
+     * Get the current head of the list
+     *
+     * @return \Chromabits\Structures\LinkedList\Node|null
+     */
+    public function head()
+    {
+        return $this->head;
+    }
+
+    /**
+     * Get the current tail of the list
+     *
+     * @return \Chromabits\Structures\LinkedList\Node|null
+     */
+    public function tail()
+    {
+        return $this->tail;
+    }
 }

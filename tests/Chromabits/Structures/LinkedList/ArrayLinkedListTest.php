@@ -130,4 +130,26 @@ class ArrayLinkedListTest extends TestCase
 
         $this->assertEquals(0, $list->count());
     }
+
+    public function testHead()
+    {
+        $list = new ArrayLinkedList();
+
+        $two = $list->push('hello2');
+        $one = $list->push('hello');
+
+        $this->assertEquals($two, $list->head());
+        $this->assertNotEquals($one, $list->head());
+    }
+
+    public function testTail()
+    {
+        $list = new ArrayLinkedList();
+
+        $two = $list->push('hello2');
+        $one = $list->push('hello');
+
+        $this->assertEquals($one, $list->tail());
+        $this->assertNotEquals($two, $list->tail());
+    }
 }

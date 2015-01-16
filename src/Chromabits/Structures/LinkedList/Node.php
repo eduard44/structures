@@ -2,6 +2,8 @@
 
 namespace Chromabits\Structures\LinkedList;
 
+use Chromabits\Structures\Interfaces\NodeInterface;
+
 /**
  * Class Node
  *
@@ -9,7 +11,7 @@ namespace Chromabits\Structures\LinkedList;
  *
  * @package Chromabits\Structures\LinkedList
  */
-class Node
+class Node implements NodeInterface
 {
     /**
      * The next node in the linked list
