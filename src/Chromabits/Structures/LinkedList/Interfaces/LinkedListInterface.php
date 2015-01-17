@@ -31,7 +31,7 @@ interface LinkedListInterface
     /**
      * Get a node in the linked list
      *
-     * @param $index
+     * @param int $index
      *
      * @return \Chromabits\Structures\LinkedList\Node
      * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
@@ -58,4 +58,14 @@ interface LinkedListInterface
      * @return \Chromabits\Structures\Interfaces\NodeInterface|null
      */
     public function tail();
+
+    /**
+     * Remove an element from the linked list
+     *
+     * @param int $index
+     *
+     * @return \Chromabits\Structures\LinkedList\Node|null
+     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     */
+    public function remove($index);
 }

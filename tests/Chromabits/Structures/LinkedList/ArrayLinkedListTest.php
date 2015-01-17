@@ -152,4 +152,57 @@ class ArrayLinkedListTest extends TestCase
         $this->assertEquals($one, $list->tail());
         $this->assertNotEquals($two, $list->tail());
     }
+
+    public function testRemove()
+    {
+        $list = new ArrayLinkedList();
+
+        $list->push('hello2');
+        $list->push('hello');
+        $list->push('hello3');
+
+        $this->assertEquals(3, $list->count());
+
+        $list->remove(1);
+
+        $this->assertEquals(2, $list->count());
+        $this->assertEquals(['hello3', 'hello2'], $list->toArray());
+
+        $list->remove(0);
+
+        $this->assertEquals(1, $list->count());
+        $this->assertEquals(['hello2'], $list->toArray());
+        $this->assertEquals($list->head(), $list->tail());
+
+        $list->remove(0);
+
+        $this->assertEquals(0, $list->count());
+        $this->assertEquals([], $list->toArray());
+        $this->assertNull($list->head());
+        $this->assertNull($list->tail());
+    }
+
+    /**
+     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     */
+    public function testRemoveWithEmpty()
+    {
+        $list = new ArrayLinkedList();
+
+        $list->remove(0);
+    }
+
+    /**
+     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     */
+    public function testRemoveOutOfBounds()
+    {
+        $list = new ArrayLinkedList();
+
+        $list->push('hello2');
+        $list->push('hello');
+        $list->push('hello3');
+
+        $list->remove(99);
+    }
 }

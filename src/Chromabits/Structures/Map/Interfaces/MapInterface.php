@@ -26,8 +26,6 @@ interface MapInterface
      *
      * @param $key
      * @param $value
-     *
-     * @return mixed
      */
     public function set($key, $value);
 
@@ -39,4 +37,13 @@ interface MapInterface
      * @return mixed
      */
     public function has($key);
+
+    /**
+     * Remove the value from the map
+     *
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function remove($key);
 }

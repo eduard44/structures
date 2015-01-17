@@ -3,10 +3,13 @@
 namespace Chromabits\Structures\LinkedList;
 
 use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
+use Chromabits\Structures\Interfaces\Arrayable;
 use Chromabits\Structures\Interfaces\Countable;
 use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
+use IteratorAggregate;
+use Traversable;
 
 /**
  * Class ArrayLinkedList
@@ -15,7 +18,7 @@ use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
  *
  * @package Chromabits\Structures\LinkedList
  */
-class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Emptyable
+class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Emptyable, IteratorAggregate, Arrayable
 {
     /**
      * @var \Chromabits\Structures\LinkedList\Node[]
@@ -199,5 +202,89 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     public function tail()
     {
         return $this->tail;
+    }
+
+    /**
+     * Retrieve an external iterator
+     *
+     * @return \Chromabits\Structures\LinkedList\LinkedListIterator
+     */
+    public function getIterator()
+    {
+        return new LinkedListIterator($this);
+    }
+
+    /**
+     * Remove an element from the linked list
+     *
+     * @param int $index
+     *
+     * @return \Chromabits\Structures\LinkedList\Node|null
+     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     */
+    public function remove($index)
+    {
+        $previous = null;
+        $current = $this->tail;
+        $currentIndex = 0;
+
+        while ($currentIndex != $index) {
+            $previous = $current;
+            $current = $current->getNext();
+
+            // If the current pointer is null, the we
+            // stepped outside the list, which most likely
+            // means the index is outside of the bounds
+            if (is_null($current)) {
+                throw new IndexOutOfBoundsException;
+            }
+
+            $currentIndex++;
+        }
+
+        // If the current pointer is null, then the list
+        // itself is empty
+        if (is_null($current)) {
+            throw new IndexOutOfBoundsException;
+        }
+
+        // If we have a reference to the previous element,
+        // the we will update it so that it points to the
+        // element after the current one
+        if (!is_null($previous)) {
+            $previous->setNext($current->getNext());
+        }
+
+        // If the current element was the tail of the list,
+        // then we update the tail of the list to the next
+        // element
+        if ($this->tail == $current) {
+            $this->tail = $current->getNext();
+        }
+
+        // If the current element is the head of the list,
+        // then we update the head of the list to the previous
+        // element
+        if ($this->head == $current) {
+            $this->head = $previous;
+        }
+
+        return $current;
+    }
+
+    /**
+     * Get array version of this instance
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $output = [];
+
+        foreach ($this as $node) {
+            $output[] = $node;
+        }
+
+        return $output;
     }
 }
