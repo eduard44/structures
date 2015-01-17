@@ -1,3 +1,3 @@
-# Structures [![Build Status](https://travis-ci.org/eduard44/structures.svg)](https://travis-ci.org/eduard44/structures)
+# Structures [![Build Status](https://travis-ci.org/eduard44/structures.svg)](https://travis-ci.org/eduard44/structures) [![Code Climate](https://codeclimate.com/github/eduard44/structures/badges/gpa.svg)](https://codeclimate.com/github/eduard44/structures) [![Test Coverage](https://codeclimate.com/github/eduard44/structures/badges/coverage.svg)](https://codeclimate.com/github/eduard44/structures)
 
 A small experiment on data structures in PHP
