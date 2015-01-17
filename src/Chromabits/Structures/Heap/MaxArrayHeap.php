@@ -5,13 +5,13 @@ namespace Chromabits\Structures\Heap;
 use Chromabits\Structures\Exceptions\InvalidOperationException;
 
 /**
- * Class MinArrayHeap
+ * Class MaxArrayHeap
  *
- * A min-heap implementation using arrays
+ * A max-heap implementation using arrays
  *
  * @package Chromabits\Structures\Heap
  */
-class MinArrayHeap extends ArrayHeap
+class MaxArrayHeap extends ArrayHeap
 {
     /**
      * Insert an element into the heap
@@ -26,11 +26,11 @@ class MinArrayHeap extends ArrayHeap
 
         $this->elements[$heapSize] = null;
 
-        self::decrease($this->elements, $heapSize, $element);
+        self::increase($this->elements, $heapSize, $element);
     }
 
     /**
-     * The HEAP-DECREASE-KEY algorithm
+     * The HEAP-INCREASE-KEY algorithm
      *
      * @param array $elements
      * @param int $target Index of the target element
@@ -38,15 +38,15 @@ class MinArrayHeap extends ArrayHeap
      *
      * @throws \Chromabits\Structures\Exceptions\InvalidOperationException
      */
-    public static function decrease(array &$elements, $target, $element)
+    public static function increase(array &$elements, $target, $element)
     {
-        if (!is_null($elements[$target]) && $element > $elements[$target]) {
+        if (!is_null($elements[$target]) && $element < $elements[$target]) {
             throw new InvalidOperationException;
         }
 
         $elements[$target] = $element;
 
-        while ($target > 0 && $elements[self::getParentIndex($target)] > $elements[$target]) {
+        while ($target > 0 && $elements[self::getParentIndex($target)] < $elements[$target]) {
             self::exchange($elements, $target, self::getParentIndex($target));
 
             $target = self::getParentIndex($target);
@@ -63,39 +63,40 @@ class MinArrayHeap extends ArrayHeap
         $heapSize = count($elements);
 
         for ($i = self::getParentIndex($heapSize - 1); $i >= 0; $i--) {
-            self::minHeapify($elements, $i);
+            self::maxHeapify($elements, $i);
         }
 
         $this->elements = $elements;
     }
 
     /**
-     * The MIN-HEAPIFY algorithm
+     * The MAX-HEAPIFY algorithm
      *
      * @param array $elements
      * @param int $index
      *
      * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
-    public static function minHeapify(array &$elements, $index = 0)
+    public static function maxHeapify(array &$elements, $index = 0)
     {
         $left = self::getLeftIndex($index);
         $right = self::getRightIndex($index);
 
         $heapSize = count($elements);
-        $smallest = $index;
+        $largest = $index;
 
-        if ($left < $heapSize && $elements[$left] < $elements[$index]) {
-            $smallest = $left;
+        if ($left < $heapSize && $elements[$left] > $elements[$index]) {
+            $largest = $left;
         }
 
-        if ($right < $heapSize && $elements[$right] < $elements[$smallest]) {
-            $smallest = $right;
+        if ($right < $heapSize && $elements[$right] > $elements[$largest]) {
+            $largest = $right;
         }
 
-        if ($smallest != $index) {
-            self::exchange($elements, $index, $smallest);
-            self::minHeapify($elements, $smallest);
+        if ($largest != $index) {
+            self::exchange($elements, $index, $largest);
+            self::maxHeapify($elements, $largest);
         }
     }
 }
+
