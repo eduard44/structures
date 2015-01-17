@@ -1,21 +1,17 @@
-# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
-
 php:
-  # aliased to a recent 5.5.x version
-  - 5.5
-  # aliased to a recent 5.6.x version
-  - 5.6
-  - hhvm
-
-# execute any number of scripts before the test run, custom env's are available as variables
+- 5.5
+- 5.6
+- hhvm
 before_script:
-  - composer update --ignore-platform-reqs
-
+- composer update --ignore-platform-reqs
 script:
-  - phpunit --coverage-text
-  - phpunit --coverage-clover build/logs/clover.xml
-
+- phpunit --coverage-text
+- phpunit --coverage-clover build/logs/clover.xml
 after_script:
-  - ./vendor/bin/test-reporter --stdout > codeclimate.json
-  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
+- ./vendor/bin/test-reporter --stdout > codeclimate.json
+- 'curl -X POST -d @codeclimate.json -H ''Content-Type: application/json'' -H ''User-Agent:
+  Code Climate (PHP Test Reporter v0.1.1)'' https://codeclimate.com/test_reports'
+env:
+  global:
+    secure: KHD1F8doXRYV2EVY23rLmZgfTZaNaXvAKDjOSCp1CUYX/lhMPuv4a8bQnPg2ctZXLXB2zOcXzFHnTsaRfbbc65CCPkMeygVDOCofKjeu8e49VeT+WDqqNNZ99tk4xrNqkJzOJb/DcKvMdLP+tD0nndtMvAFiPTI67AGC/sjDu/E=
