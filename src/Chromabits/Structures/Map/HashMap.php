@@ -13,7 +13,27 @@ use Chromabits\Structures\Map\Interfaces\MapInterface;
 /**
  * Class HashMap
  *
- * A simple hashmap implementation
+ * A simple hash map implementation
+ *
+ * Internally it uses an array and linked list to handle collisions,
+ * and scales dynamically to prevent a large number of collisions.
+ * How many collisions occur depends largely on the hashing function.
+ *
+ * Some pre-set properties are:
+ *
+ * - The internal array will shrink once the load factor goes under
+ * the value of 0.5 ($this->minLoad)
+ * - The internal array will grow once the load factor goes over
+ * the value of 1.5 ($this->maxLoad)
+ * - The internal array will not be shrunk to sizes under INITIAL_SIZE
+ * - The internal array will be initialized with a size of INITIAL_SIZE
+ * - During shrinking and growing operations, the internal array will be
+ * scaled by a factor of 2 ($this->scaleFactor)
+ * - A Chromabits\Structures\Map\Hashers\ScalarHasher will be used as
+ * the hashing function
+ *
+ * All this properties are customizable by extending this class and
+ * overriding the respective properties.
  *
  * @package Chromabits\Structures\Map
  */
@@ -111,6 +131,8 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
         }
 
         $this->addToBucket($this->buckets[$index], $key, $value);
+
+        $this->resizeIfNeeded();
     }
 
     /**
@@ -168,15 +190,28 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
      */
     protected function rehash(array $old)
     {
-        foreach ($old as $key => $value)
+        // We will cycle over each bucket before the internal array was
+        // resize, go throw each element in the bucket, and internally
+        // re-add them into the map
+        foreach ($old as $oldBucket)
         {
-            $index = $this->computeIndex($value);
-
-            if (is_null($this->buckets[$index])) {
-                $this->buckets[$index] = new ArrayLinkedList();
+            // If the old bucket is null, the we can skip it completely
+            if (is_null($oldBucket)) {
+                continue;
             }
 
-            $this->addToBucket($this->buckets[$index], $key, $value);
+            /** @var Node[] $oldBucket */
+            foreach ($oldBucket as $hashMapNode) {
+                $index = $this->computeIndex($hashMapNode->getKey());
+
+                // Create a new bucket if it does not exist yet for this
+                // index
+                if (is_null($this->buckets[$index])) {
+                    $this->buckets[$index] = new ArrayLinkedList();
+                }
+
+                $this->addToBucket($this->buckets[$index], $hashMapNode->getKey(), $hashMapNode->getContent());
+            }
         }
     }
 
@@ -300,13 +335,8 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
         }
 
         $this->removeFromBucket($this->buckets[$index], $key);
-    }
 
-    protected function handleScale()
-    {
-        // TODO: Check if load-factor indicates we should/grow or shrink
-
-        // TODO: Grow or shrink
+        $this->resizeIfNeeded();
     }
 
     /**
@@ -326,8 +356,20 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
      *
      * @return bool
      */
-    protected function showShrink()
+    protected function shouldShrink()
     {
+        // For shrinking, we need to check for the corner case in which
+        // the internal array could shrink smaller than its initial size.
+        // So we compute what would be size after the shrinking and check if
+        // it happens.
+        $sizeAfterShrink = count($this->buckets) / $this->scaleFactor;
+
+        // If it is the case, we cancel the shrink operation since we want
+        // to keep a minimum size for internal array.
+        if ($sizeAfterShrink < self::INITIAL_SIZE) {
+            return false;
+        }
+
         return ($this->getLoadFactor() < $this->minLoad);
     }
 
@@ -368,5 +410,17 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
         }
 
         return true;
+    }
+
+    /**
+     * Resize the data structure if needed
+     */
+    protected function resizeIfNeeded()
+    {
+        if ($this->shouldGrow()) {
+            $this->grow();
+        } elseif ($this->shouldShrink()) {
+            $this->shrink();
+        }
     }
 }
