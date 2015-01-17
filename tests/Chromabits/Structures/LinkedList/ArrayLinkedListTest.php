@@ -43,7 +43,7 @@ class ArrayLinkedListTest extends TestCase
     }
 
     /**
-     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundException
+     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public function testGetWithEmpty()
     {
@@ -53,7 +53,7 @@ class ArrayLinkedListTest extends TestCase
     }
 
     /**
-     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundException
+     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public function testGetWithInvalid()
     {

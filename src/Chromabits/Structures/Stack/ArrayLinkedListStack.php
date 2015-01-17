@@ -3,6 +3,7 @@
 namespace Chromabits\Structures\Stack;
 
 use Chromabits\Structures\Interfaces\Countable;
+use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\LinkedList\ArrayLinkedList;
 use Chromabits\Structures\Interfaces\Flushable;
 
@@ -13,7 +14,7 @@ use Chromabits\Structures\Interfaces\Flushable;
  *
  * @package src\Chromabits\Structures\Stack
  */
-class ArrayLinkedListStack extends LinkedListStack implements Flushable, Countable
+class ArrayLinkedListStack extends LinkedListStack implements Flushable, Countable, Emptyable
 {
     /**
      * @var ArrayLinkedList

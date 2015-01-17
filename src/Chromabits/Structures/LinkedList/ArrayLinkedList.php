@@ -2,8 +2,9 @@
 
 namespace Chromabits\Structures\LinkedList;
 
-use Chromabits\Structures\Exceptions\IndexOutOfBoundException;
+use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
 use Chromabits\Structures\Interfaces\Countable;
+use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
 
@@ -14,7 +15,7 @@ use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
  *
  * @package Chromabits\Structures\LinkedList
  */
-class ArrayLinkedList implements Flushable, Countable, LinkedListInterface
+class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Emptyable
 {
     /**
      * @var \Chromabits\Structures\LinkedList\Node[]
@@ -95,12 +96,12 @@ class ArrayLinkedList implements Flushable, Countable, LinkedListInterface
      * @param $index
      *
      * @return \Chromabits\Structures\LinkedList\Node
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundException
+     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public function get($index)
     {
         if (is_null($this->head)) {
-            throw new IndexOutOfBoundException;
+            throw new IndexOutOfBoundsException;
         }
 
         $count = 0;
@@ -116,7 +117,7 @@ class ArrayLinkedList implements Flushable, Countable, LinkedListInterface
             $current = $next;
         }
 
-        throw new IndexOutOfBoundException;
+        throw new IndexOutOfBoundsException;
     }
 
     /**

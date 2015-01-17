@@ -34,7 +34,7 @@ interface LinkedListInterface
      * @param $index
      *
      * @return \Chromabits\Structures\LinkedList\Node
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundException
+     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public function get($index);
 
