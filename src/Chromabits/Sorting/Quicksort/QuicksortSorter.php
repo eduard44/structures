@@ -16,7 +16,6 @@ use Chromabits\Sorting\Interfaces\SorterInterface;
  */
 class QuicksortSorter implements SorterInterface
 {
-
     /**
      * @var \Chromabits\Nucleus\Support\ArrayUtils
      */

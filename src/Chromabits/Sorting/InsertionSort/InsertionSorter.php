@@ -7,9 +7,15 @@ use Chromabits\Sorting\Comparators\NumericComparator;
 use Chromabits\Sorting\Interfaces\ComparatorInterface;
 use Chromabits\Sorting\Interfaces\SorterInterface;
 
+/**
+ * Class InsertionSorter
+ *
+ * Implementation of the INSERTION-SORT algorithm
+ *
+ * @package Chromabits\Sorting\InsertionSort
+ */
 class InsertionSorter implements SorterInterface
 {
-
     /**
      * @var \Chromabits\Nucleus\Support\ArrayUtils
      */

@@ -38,8 +38,24 @@ abstract class ArrayHeap implements HeapInterface, Countable, Flushable, Emptyab
         $this->elements = [];
     }
 
+    /**
+     * Insert an element into the heap
+     *
+     * @param $element
+     *
+     * @return mixed
+     */
     public abstract function insert($element);
 
+    /**
+     * Fill the heap with an input array
+     *
+     * The array will be converted to a heap using the MAX-HEAPIFY
+     * or MIN-HEAPIFY accordingly
+     *
+     * @param array $input
+     * @return void
+     */
     public abstract function heapify(array $input);
 
     /**

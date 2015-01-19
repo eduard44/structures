@@ -22,6 +22,9 @@ class RandomizedQuicksortSorter extends QuicksortSorter
      */
     protected function select(array &$input, $head, $tail)
     {
+        // Here we just pick a random integer between the start and
+        // end of the current partition (inclusive) and use that as
+        // the pivot
         return rand($head, $tail);
     }
 }

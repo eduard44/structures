@@ -15,15 +15,12 @@ use Iterator;
  */
 class LinkedListIterator implements Iterator
 {
-
     /**
      * Current position of the iterator
      *
      * @var \Chromabits\Structures\LinkedList\Node
      */
     protected $current;
-
-    protected $function;
 
     /**
      * LinkedList being iterated

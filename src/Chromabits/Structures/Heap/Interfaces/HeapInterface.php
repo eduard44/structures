@@ -16,8 +16,6 @@ interface HeapInterface
      * Insert an element into the heap
      *
      * @param $element
-     *
-     * @return \Chromabits\Structures\Interfaces\NodeInterface|mixed
      */
     public function insert($element);
 

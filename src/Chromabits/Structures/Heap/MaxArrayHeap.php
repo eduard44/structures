@@ -19,6 +19,7 @@ class MaxArrayHeap extends ArrayHeap
      * @param $element
      *
      * @throws \Chromabits\Structures\Exceptions\InvalidOperationException
+     * @return void
      */
     public function insert($element)
     {
@@ -57,6 +58,7 @@ class MaxArrayHeap extends ArrayHeap
      * Build the a min-heap out of an array
      *
      * @param array $elements
+     * @return void
      */
     public function heapify(array $elements)
     {
