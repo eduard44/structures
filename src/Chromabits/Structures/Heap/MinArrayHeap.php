@@ -58,6 +58,7 @@ class MinArrayHeap extends ArrayHeap
      * Build the a min-heap out of an array
      *
      * @param array $elements
+     *
      * @return void
      */
     public function heapify(array $elements)

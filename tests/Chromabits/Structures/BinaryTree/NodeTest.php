@@ -55,6 +55,17 @@ class NodeTest extends TestCase
         $this->assertEquals($child, $node->getRightChild());
     }
 
+    public function testKeyMutators()
+    {
+        $node = new Node();
+
+        $this->assertNull($node->getKey());
+
+        $node->setKey('hi');
+
+        $this->assertEquals('hi', $node->getKey());
+    }
+
     public function testIsLeaf()
     {
         $leftChild = new Node();

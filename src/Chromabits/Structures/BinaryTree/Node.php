@@ -30,14 +30,40 @@ class Node implements NodeInterface
     protected $rightChild;
 
     /**
+     * @var mixed
+     */
+    protected $key;
+
+    /**
      * Construct an instance of a Node
      */
     public function __construct()
     {
+        $this->key = null;
         $this->content = null;
 
         $this->leftChild = null;
         $this->rightChild = null;
+    }
+
+    /**
+     * Set the key
+     *
+     * @return mixed
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Get the key
+     *
+     * @param mixed $key
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
     }
 
     /**

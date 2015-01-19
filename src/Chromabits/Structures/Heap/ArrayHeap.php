@@ -54,6 +54,7 @@ abstract class ArrayHeap implements HeapInterface, Countable, Flushable, Emptyab
      * or MIN-HEAPIFY accordingly
      *
      * @param array $input
+     *
      * @return void
      */
     public abstract function heapify(array $input);
