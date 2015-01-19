@@ -1,24 +1,24 @@
 <?php
 
-namespace Tests\Chromabits\Sorting\Quicksort;
+namespace Tests\Chromabits\Sorting\InsertionSort;
 
 use Chromabits\Sorting\Comparators\StringComparator;
 use Chromabits\Sorting\Interfaces\ComparatorInterface;
-use Chromabits\Sorting\Quicksort\QuicksortSorter;
+use Chromabits\Sorting\InsertionSort\InsertionSorter;
 use Tests\Chromabits\Support\TestCase;
 
 /**
- * Class QuicksortSorterTest
+ * Class InsertionSorterTest
  *
  * @package Tests\Chromabits\Sorting\Quicksort
  */
-class QuicksortSorterTest extends TestCase
+class InsertionSorterTest extends TestCase
 {
     public function testConstructor()
     {
         $this->assertInstanceOf(
             [
-                'Chromabits\Sorting\Quicksort\QuicksortSorter',
+                'Chromabits\Sorting\InsertionSort\InsertionSorter',
                 'Chromabits\Sorting\Interfaces\SorterInterface'
             ],
             $this->make()
@@ -27,7 +27,7 @@ class QuicksortSorterTest extends TestCase
 
     protected function make(ComparatorInterface $comparator = null)
     {
-        return new QuicksortSorter($comparator);
+        return new InsertionSorter($comparator);
     }
 
     public function testSort()
@@ -42,11 +42,12 @@ class QuicksortSorterTest extends TestCase
 
     public function testSortWithStrings()
     {
-        $input = ['a', 'ee', 's', 'e', 'z'];
-        $output = ['a', 'e', 'ee', 's', 'z'];
+        $input = ['a', 'g', 's', 'e', 'z'];
+        $output = ['a', 'e', 'g', 's', 'z'];
 
         $sorter = $this->make(new StringComparator());
 
         $this->assertEquals($output, $sorter->sort($input));
     }
 }
+

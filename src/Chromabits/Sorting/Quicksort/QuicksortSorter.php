@@ -55,6 +55,22 @@ class QuicksortSorter implements SorterInterface
     }
 
     /**
+     * Select the pivot for the PARTITION step
+     *
+     * @param array $input
+     * @param $head
+     * @param $tail
+     *
+     * @return mixed
+     */
+    protected function select(array &$input, $head, $tail)
+    {
+        // This is not the randomized version, so we will just take the
+        // last element in the array as out pivot
+        return $tail;
+    }
+
+    /**
      * The PARTITION algorithm
      *
      * @param array $input
@@ -66,9 +82,7 @@ class QuicksortSorter implements SorterInterface
      */
     protected function partition(array &$input, $head, $tail)
     {
-        // This is not the randomized version, so we will just take the
-        // last element in the array as out pivot
-        $pivotIndex = $tail;
+        $pivotIndex = $this->select($input, $head, $tail);
         $pivotValue = $input[$pivotIndex];
 
         $this->arrayUtils->exchange($input, $pivotIndex, $tail);
