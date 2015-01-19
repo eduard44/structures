@@ -6,6 +6,7 @@ use Chromabits\Structures\Interfaces\Countable;
 use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\Stack\ArrayLinkedListStack;
+use Chromabits\Structures\Stack\Interfaces\StackInterface;
 
 /**
  * Class BinaryTree
@@ -68,53 +69,88 @@ class BinaryTree implements Countable, Emptyable, Flushable
         while (true) {
             if ($stackRoot['right'] === 'true' || $stack->count() < 1) {
                 break;
-            }
-
-            $top = $stack->top()->getContent();
-
-            // If the node is null, then it does not exists, therefore we
-            // just need to back track
-            if (is_null($top['node'])) {
+            } else if (is_null($stack->top()->getContent()['node'])) {
+                // If the node is null, then it does not exists, therefore we
+                // just need to back track
                 $stack->pop();
 
                 continue;
             }
 
+            $top = $stack->top()->getContent();
+
             if ($top['left'] === 'false') {
-                // Descend to the left
-                $top['left'] = 'true';
-
-                $stack->top()->setContent($top);
-
-                $stack->push([
-                    'node' => $top['node']->getLeftChild(),
-                    'right' => 'false',
-                    'left' => 'false',
-                    'explored' => 'false'
-                ]);
+                $this->depthTraverseLeft($stack);
             } elseif ($top['right'] === 'false') {
-                // Descend to the right
-                $top['right'] = 'true';
-
-                $stack->top()->setContent($top);
-
-                $stack->push([
-                    'node' => $top['node']->getRightChild(),
-                    'right' => 'false',
-                    'left' => 'false',
-                    'explored' => 'false'
-                ]);
+                $this->depthTraverseRight($stack);
             } elseif ($top['explored'] === 'false') {
-                // Call the callback function with the current element
-                $callback($top['node']);
-
-                $top['explored'] = 'true';
-
-                $stack->top()->setContent($top);
+                $this->depthTraversalExplore($callback, $stack);
             } elseif ($top['right'] === 'true' && $top['left'] === 'true') {
                 $stack->pop();
             }
         }
+    }
+
+    /**
+     * Depth traverse to the left
+     *
+     * @param \Chromabits\Structures\Stack\Interfaces\StackInterface $stack
+     */
+    protected function depthTraverseLeft(StackInterface $stack)
+    {
+        $top = $stack->top()->getContent();
+
+        // Descend to the left
+        $top['left'] = 'true';
+
+        $stack->top()->setContent($top);
+
+        $stack->push([
+            'node' => $top['node']->getLeftChild(),
+            'right' => 'false',
+            'left' => 'false',
+            'explored' => 'false'
+        ]);
+    }
+
+    /**
+     * Depth traverse to the right
+     *
+     * @param \Chromabits\Structures\Stack\Interfaces\StackInterface $stack
+     */
+    protected function depthTraverseRight(StackInterface $stack)
+    {
+        $top = $stack->top()->getContent();
+
+        // Descend to the right
+        $top['right'] = 'true';
+
+        $stack->top()->setContent($top);
+
+        $stack->push([
+            'node' => $top['node']->getRightChild(),
+            'right' => 'false',
+            'left' => 'false',
+            'explored' => 'false'
+        ]);
+    }
+
+    /**
+     * Call the callback for the node
+     *
+     * @param callable $callback
+     * @param \Chromabits\Structures\Stack\Interfaces\StackInterface $stack
+     */
+    protected function depthTraversalExplore(callable $callback, StackInterface $stack)
+    {
+        $top = $stack->top()->getContent();
+
+        // Call the callback function with the current element
+        $callback($top['node']);
+
+        $top['explored'] = 'true';
+
+        $stack->top()->setContent($top);
     }
 
     /**
