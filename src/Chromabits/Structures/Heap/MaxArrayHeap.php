@@ -77,8 +77,6 @@ class MaxArrayHeap extends ArrayHeap
      *
      * @param array $elements
      * @param int $index
-     *
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public static function maxHeapify(array &$elements, $index = 0)
     {

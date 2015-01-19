@@ -88,4 +88,24 @@ class NodeTest extends TestCase
         $this->assertFalse($three->isLeaf());
         $this->assertFalse($four->isLeaf());
     }
+
+    public function testFlush()
+    {
+        $leftChild = new Node();
+        $rightChild = new Node();
+
+        $node = new Node();
+
+        $node->setKey('hi');
+        $node->setContent('hello');
+        $node->setLeftChild($leftChild);
+        $node->setRightChild($rightChild);
+
+        $node->flush();
+
+        $this->assertNull($node->getKey());
+        $this->assertNull($node->getContent());
+        $this->assertNull($node->getLeftChild());
+        $this->assertNull($node->getRightChild());
+    }
 }

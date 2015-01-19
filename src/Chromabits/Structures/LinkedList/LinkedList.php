@@ -2,29 +2,19 @@
 
 namespace Chromabits\Structures\LinkedList;
 
-use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
-use Chromabits\Structures\Interfaces\Arrayable;
-use Chromabits\Structures\Interfaces\Countable;
-use Chromabits\Structures\Interfaces\Emptyable;
-use Chromabits\Structures\Interfaces\Flushable;
+use Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException;
+use Chromabits\Structures\Interfaces\CollectionInterface;
 use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
-use IteratorAggregate;
 
 /**
- * Class ArrayLinkedList
+ * Class LinkedList
  *
  * A single-linked list implementation
  *
  * @package Chromabits\Structures\LinkedList
  */
-class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Emptyable, IteratorAggregate, Arrayable
+class LinkedList implements LinkedListInterface, CollectionInterface
 {
-
-    /**
-     * @var \Chromabits\Structures\LinkedList\Node[]
-     */
-    protected $nodes;
-
     /**
      * @var \Chromabits\Structures\LinkedList\Node|null
      */
@@ -36,18 +26,16 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     protected $tail;
 
     /**
-     * Construct an instance of a ArrayLinkedList
+     * Construct an instance of a LinkedList
      */
     public function __construct()
     {
-        $this->nodes = [];
-
         $this->head = null;
         $this->tail = null;
     }
 
     /**
-     * Add an element to an ArrayLinkedList
+     * Add an element to an LinkedList
      *
      * @param $content
      *
@@ -56,8 +44,6 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     public function push($content)
     {
         $node = new Node($content);
-
-        $this->nodes[] = $node;
 
         // If both the head and tail are null, the list is empty
         if (is_null($this->head) && is_null($this->tail)) {
@@ -96,10 +82,10 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     /**
      * Get a node in the linked-list
      *
-     * @param $index
+     * @param int $index
      *
      * @return \Chromabits\Structures\LinkedList\Node
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function get($index)
     {
@@ -145,22 +131,7 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
 
         $this->tail = $last->getNext();
 
-        $this->internalRemove($last);
-
         return $last;
-    }
-
-    /**
-     * Removes an element from the internal array
-     *
-     * @param $node
-     */
-    protected function internalRemove($node)
-    {
-        // Remove the element from the internal array
-        if (($key = array_search($node, $this->nodes)) !== false) {
-            unset($this->nodes[$key]);
-        }
     }
 
     /**
@@ -170,8 +141,6 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     {
         $this->head = null;
         $this->tail = null;
-
-        $this->nodes = [];
     }
 
     /**
@@ -220,7 +189,7 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
      * @param int $index
      *
      * @return \Chromabits\Structures\LinkedList\Node|null
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function remove($index)
     {
@@ -249,7 +218,7 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
         }
 
         // If we have a reference to the previous element,
-        // the we will update it so that it points to the
+        // then we will update it so that it points to the
         // element after the current one
         if (!is_null($previous)) {
             $previous->setNext($current->getNext());
@@ -267,6 +236,10 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
         // element
         if ($this->head == $current) {
             $this->head = $previous;
+
+            if (!is_null($this->head)) {
+                $this->head->flushNext();
+            }
         }
 
         return $current;
@@ -286,5 +259,23 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
         }
 
         return $output;
+    }
+
+    /**
+     * Return whether or not the collection contains the specified record
+     *
+     * @param $record
+     *
+     * @return bool
+     */
+    public function has($record)
+    {
+        foreach ($this as $nodeContent) {
+            if ($nodeContent == $record) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -41,4 +41,30 @@ class NodeTest extends TestCase
 
         $this->assertEquals($nodeOther, $node->getNext());
     }
+
+    public function testFlushNext()
+    {
+        $node = new Node('hi');
+        $nodeOther = new Node('hi');
+
+        $node->setNext($nodeOther);
+
+        $node->flushNext();
+
+        $this->assertNull($node->getNext());
+    }
+
+    public function testFlush()
+    {
+        $node = new Node('hi');
+        $nodeOther = new Node('hi');
+
+        $node->setNext($nodeOther);
+        $node->setContent('hi');
+
+        $node->flush();
+
+        $this->assertNull($node->getNext());
+        $this->assertNull($node->getContent());
+    }
 }

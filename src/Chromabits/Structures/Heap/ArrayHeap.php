@@ -2,8 +2,8 @@
 
 namespace Chromabits\Structures\Heap;
 
+use Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException;
 use Chromabits\Structures\BinaryTree\Traits\BinaryNodesTrait;
-use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
 use Chromabits\Structures\Heap\Interfaces\HeapInterface;
 use Chromabits\Structures\Interfaces\Arrayable;
 use Chromabits\Structures\Interfaces\Countable;
@@ -108,7 +108,7 @@ abstract class ArrayHeap implements HeapInterface, Countable, Flushable, Emptyab
      * @param $index
      *
      * @return mixed
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function get($index)
     {

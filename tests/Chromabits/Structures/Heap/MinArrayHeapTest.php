@@ -42,7 +42,7 @@ class MinArrayHeapTest extends TestCase
     }
 
     /**
-     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @expectedException \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function testGetWithInvalid()
     {
@@ -94,7 +94,7 @@ class MinArrayHeapTest extends TestCase
     }
 
     /**
-     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @expectedException \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function testExchangeWithInvalidBounds()
     {

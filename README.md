@@ -10,6 +10,7 @@ A small experiment on data structures in PHP
 - MinHeap
 - MaxHeap
 - LinkedList
+- DoublyLinkedList
 - HashMap
 - Stack
 

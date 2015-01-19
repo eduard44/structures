@@ -3,6 +3,8 @@
 namespace Chromabits\Structures\BinaryTree;
 
 use Chromabits\Structures\Interfaces\Countable;
+use Chromabits\Structures\Interfaces\Emptyable;
+use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\Stack\ArrayLinkedListStack;
 
 /**
@@ -12,9 +14,8 @@ use Chromabits\Structures\Stack\ArrayLinkedListStack;
  *
  * @package Chromabits\Structures\BinaryTree
  */
-class BinaryTree implements Countable
+class BinaryTree implements Countable, Emptyable, Flushable
 {
-
     /**
      * This is a reference to the root of the tree
      *
@@ -56,13 +57,11 @@ class BinaryTree implements Countable
 
         $stack = new ArrayLinkedListStack();
 
-        $callback($start);
-
         $stackRootNode = $stack->push([
             'node' => $start,
             'left' => 'false',
             'right' => 'false',
-            'explored' => 'true'
+            'explored' => 'false'
         ]);
         $stackRoot = $stackRootNode->getContent();
 
@@ -81,14 +80,7 @@ class BinaryTree implements Countable
                 continue;
             }
 
-            if ($top['explored'] === 'false') {
-                // Call the callback function with the current element
-                $callback($top['node']);
-
-                $top['explored'] = 'true';
-
-                $stack->top()->setContent($top);
-            } elseif ($top['left'] === 'false') {
+            if ($top['left'] === 'false') {
                 // Descend to the left
                 $top['left'] = 'true';
 
@@ -112,9 +104,41 @@ class BinaryTree implements Countable
                     'left' => 'false',
                     'explored' => 'false'
                 ]);
+            } elseif ($top['explored'] === 'false') {
+                // Call the callback function with the current element
+                $callback($top['node']);
+
+                $top['explored'] = 'true';
+
+                $stack->top()->setContent($top);
             } elseif ($top['right'] === 'true' && $top['left'] === 'true') {
                 $stack->pop();
             }
         }
+    }
+
+    /**
+     * Returns whether or not the set is empty
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return is_null($this->root);
+    }
+
+    /**
+     * Clear all elements of this instance and restore it
+     * to its original state
+     *
+     * @return mixed
+     */
+    public function flush()
+    {
+        $this->depthTraversal(function (Node $node) {
+            $node->flush();
+        });
+
+        $this->root = null;
     }
 }

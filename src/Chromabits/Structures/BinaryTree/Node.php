@@ -2,6 +2,7 @@
 
 namespace Chromabits\Structures\BinaryTree;
 
+use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\Interfaces\NodeInterface;
 
 /**
@@ -11,9 +12,8 @@ use Chromabits\Structures\Interfaces\NodeInterface;
  *
  * @package Chromabits\Structures\BinaryTree
  */
-class Node implements NodeInterface
+class Node implements NodeInterface, Flushable
 {
-
     /**
      * @var mixed
      */
@@ -134,5 +134,20 @@ class Node implements NodeInterface
     public function isLeaf()
     {
         return is_null($this->leftChild) && is_null($this->rightChild);
+    }
+
+    /**
+     * Clear all elements of this instance and restore it
+     * to its original state
+     *
+     * @return mixed
+     */
+    public function flush()
+    {
+        $this->key = null;
+        $this->content = null;
+
+        $this->leftChild = null;
+        $this->rightChild = null;
     }
 }

@@ -67,4 +67,35 @@ class BinarySearchTreeTest extends TestCase
         $this->assertEquals(9, $tree->search(9)->getKey());
         $this->assertNull($tree->search(90));
     }
+
+    public function testIsEmpty()
+    {
+        $tree = new BinarySearchTree();
+
+        $this->assertTrue($tree->isEmpty());
+
+        $tree->push(3);
+        $tree->push(20);
+        $tree->push(9);
+
+        $this->assertFalse($tree->isEmpty());
+    }
+
+    /**
+     * @depends testIsEmpty
+     */
+    public function testFlush()
+    {
+        $tree = new BinarySearchTree();
+
+        $this->assertTrue($tree->isEmpty());
+
+        $tree->push(3);
+        $tree->push(20);
+        $tree->push(9);
+
+        $tree->flush();
+
+        $this->assertTrue($tree->isEmpty());
+    }
 }

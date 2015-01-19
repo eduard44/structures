@@ -6,7 +6,7 @@ use Chromabits\Structures\Exceptions\InvalidOperationException;
 use Chromabits\Structures\Interfaces\Arrayable;
 use Chromabits\Structures\Interfaces\Countable;
 use Chromabits\Structures\Interfaces\Emptyable;
-use Chromabits\Structures\LinkedList\ArrayLinkedList;
+use Chromabits\Structures\LinkedList\LinkedList;
 use Chromabits\Structures\Map\Hashers\ScalarHasher;
 use Chromabits\Structures\Map\Interfaces\MapInterface;
 
@@ -51,7 +51,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
     /**
      * Internal array of elements
      *
-     * @var \Chromabits\Structures\LinkedList\ArrayLinkedList[]
+     * @var \Chromabits\Structures\LinkedList\LinkedList[]
      */
     protected $buckets;
 
@@ -127,7 +127,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
         $index = $this->computeIndex($key);
 
         if (is_null($this->buckets[$index])) {
-            $this->buckets[$index] = new ArrayLinkedList();
+            $this->buckets[$index] = new LinkedList();
         }
 
         $this->addToBucket($this->buckets[$index], $key, $value);
@@ -206,7 +206,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
                 // Create a new bucket if it does not exist yet for this
                 // index
                 if (is_null($this->buckets[$index])) {
-                    $this->buckets[$index] = new ArrayLinkedList();
+                    $this->buckets[$index] = new LinkedList();
                 }
 
                 $this->addToBucket($this->buckets[$index], $hashMapNode->getKey(), $hashMapNode->getContent());
@@ -221,11 +221,11 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
      * or a new Node is created and added to the list with
      * key and value info
      *
-     * @param \Chromabits\Structures\LinkedList\ArrayLinkedList $bucket
+     * @param \Chromabits\Structures\LinkedList\LinkedList $bucket
      * @param $key
      * @param $value
      */
-    protected function addToBucket(ArrayLinkedList $bucket, $key, $value)
+    protected function addToBucket(LinkedList $bucket, $key, $value)
     {
         $index = $this->existsInBucket($bucket, $key);
 
@@ -244,12 +244,12 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
     /**
      * An element is removed from the bucket if its key is defined in any node
      *
-     * @param \Chromabits\Structures\LinkedList\ArrayLinkedList $bucket
+     * @param \Chromabits\Structures\LinkedList\LinkedList $bucket
      * @param $key
      *
      * @throws \Chromabits\Structures\Exceptions\InvalidOperationException
      */
-    protected function removeFromBucket(ArrayLinkedList $bucket, $key)
+    protected function removeFromBucket(LinkedList $bucket, $key)
     {
         $index = $this->existsInBucket($bucket, $key);
 
@@ -263,12 +263,12 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
     /**
      * Return whether or not a key already exists inside a bucket
      *
-     * @param \Chromabits\Structures\LinkedList\ArrayLinkedList $bucket
+     * @param \Chromabits\Structures\LinkedList\LinkedList $bucket
      * @param $key
      *
      * @return bool|int
      */
-    protected function existsInBucket(ArrayLinkedList $bucket, $key)
+    protected function existsInBucket(LinkedList $bucket, $key)
     {
         $count = 0;
         $current = $bucket->tail();

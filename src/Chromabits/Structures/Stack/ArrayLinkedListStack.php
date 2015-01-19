@@ -5,12 +5,12 @@ namespace Chromabits\Structures\Stack;
 use Chromabits\Structures\Interfaces\Countable;
 use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
-use Chromabits\Structures\LinkedList\ArrayLinkedList;
+use Chromabits\Structures\LinkedList\LinkedList;
 
 /**
  * Class ArrayLinkedListStack
  *
- * A stack data structure implementation using a ArrayLinkedList
+ * A stack data structure implementation using a LinkedList
  *
  * @package src\Chromabits\Structures\Stack
  */
@@ -18,7 +18,7 @@ class ArrayLinkedListStack extends LinkedListStack implements Flushable, Countab
 {
 
     /**
-     * @var ArrayLinkedList
+     * @var LinkedList
      */
     protected $list;
 
@@ -27,7 +27,7 @@ class ArrayLinkedListStack extends LinkedListStack implements Flushable, Countab
      */
     protected function initList()
     {
-        $this->list = new ArrayLinkedList();
+        $this->list = new LinkedList();
     }
 
     /**

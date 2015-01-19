@@ -77,8 +77,6 @@ class MinArrayHeap extends ArrayHeap
      *
      * @param array $elements
      * @param int $index
-     *
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
      */
     public static function minHeapify(array &$elements, $index = 0)
     {

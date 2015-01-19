@@ -2,7 +2,7 @@
 
 namespace Tests\Chromabits\Structures\LinkedList;
 
-use Chromabits\Structures\LinkedList\ArrayLinkedList;
+use Chromabits\Structures\LinkedList\LinkedList;
 use Chromabits\Structures\LinkedList\LinkedListIterator;
 use Tests\Chromabits\Support\TestCase;
 
@@ -15,7 +15,7 @@ class LinkedListIteratorTest extends TestCase
 {
     public function testConstructor()
     {
-        $iterator = new LinkedListIterator(new ArrayLinkedList());
+        $iterator = new LinkedListIterator(new LinkedList());
 
         $this->assertInstanceOf('Chromabits\Structures\LinkedList\LinkedListIterator', $iterator);
         $this->assertInstanceOf('Iterator', $iterator);
@@ -23,7 +23,7 @@ class LinkedListIteratorTest extends TestCase
 
     public function testKey()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $list->push('hello');
         $list->push('world');
@@ -35,7 +35,7 @@ class LinkedListIteratorTest extends TestCase
 
     public function testKeyWithEmpty()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $iterator = new LinkedListIterator($list);
 
@@ -44,7 +44,7 @@ class LinkedListIteratorTest extends TestCase
 
     public function testCurrent()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $list->push('hello');
         $list->push('world');
@@ -55,11 +55,11 @@ class LinkedListIteratorTest extends TestCase
     }
 
     /**
-     * @expectedException \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @expectedException \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function testCurrentWithEmpty()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $iterator = new LinkedListIterator($list);
 
@@ -72,7 +72,7 @@ class LinkedListIteratorTest extends TestCase
      */
     public function testNext()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $list->push('hello');
         $list->push('world');
@@ -93,7 +93,7 @@ class LinkedListIteratorTest extends TestCase
      */
     public function testValid()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $list->push('hello');
         $list->push('world');
@@ -113,7 +113,7 @@ class LinkedListIteratorTest extends TestCase
 
     public function testValidWithEmpty()
     {
-        $iterator = new LinkedListIterator(new ArrayLinkedList());
+        $iterator = new LinkedListIterator(new LinkedList());
 
         $this->assertFalse($iterator->valid());
     }
@@ -125,7 +125,7 @@ class LinkedListIteratorTest extends TestCase
      */
     public function testRewind()
     {
-        $list = new ArrayLinkedList();
+        $list = new LinkedList();
 
         $list->push('hello');
         $list->push('world');

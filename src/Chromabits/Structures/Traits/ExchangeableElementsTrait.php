@@ -2,7 +2,7 @@
 
 namespace Chromabits\Structures\Traits;
 
-use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
+use Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException;
 
 /**
  * Trait ExchangeableElementsTrait
@@ -18,7 +18,7 @@ trait ExchangeableElementsTrait
      * @param int $indexA
      * @param int $indexB
      *
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public static function exchange(array &$elements, $indexA, $indexB)
     {

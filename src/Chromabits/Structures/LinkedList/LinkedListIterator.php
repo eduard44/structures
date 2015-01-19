@@ -2,7 +2,7 @@
 
 namespace Chromabits\Structures\LinkedList;
 
-use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
+use Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException;
 use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
 use Iterator;
 
@@ -58,7 +58,7 @@ class LinkedListIterator implements Iterator
      * Get the current element
      *
      * @return mixed
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function current()
     {

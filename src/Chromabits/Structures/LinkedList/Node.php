@@ -2,6 +2,7 @@
 
 namespace Chromabits\Structures\LinkedList;
 
+use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\Interfaces\NodeInterface;
 
 /**
@@ -11,9 +12,8 @@ use Chromabits\Structures\Interfaces\NodeInterface;
  *
  * @package Chromabits\Structures\LinkedList
  */
-class Node implements NodeInterface
+class Node implements NodeInterface, Flushable
 {
-
     /**
      * The next node in the linked list
      *
@@ -79,5 +79,23 @@ class Node implements NodeInterface
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * Restore the node to its original state
+     */
+    public function flush()
+    {
+        $this->content = null;
+
+        $this->flushNext();
+    }
+
+    /**
+     * Reset the next node pointer
+     */
+    public function flushNext()
+    {
+        $this->next = null;
     }
 }

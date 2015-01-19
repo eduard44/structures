@@ -41,7 +41,7 @@ interface HeapInterface
      * @param $index
      *
      * @return mixed
-     * @throws \Chromabits\Structures\Exceptions\IndexOutOfBoundsException
+     * @throws \Chromabits\Nucleus\Exceptions\IndexOutOfBoundsException
      */
     public function get($index);
 }
