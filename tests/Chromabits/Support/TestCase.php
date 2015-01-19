@@ -2,6 +2,8 @@
 
 namespace Tests\Chromabits\Support;
 
+use Chromabits\Nucleus\Testing\TestCase as BaseTestCase;
+
 /**
  * Class TestCase
  *
@@ -9,7 +11,7 @@ namespace Tests\Chromabits\Support;
  *
  * @package Tests\Chromabits
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends BaseTestCase
 {
     //
 }
