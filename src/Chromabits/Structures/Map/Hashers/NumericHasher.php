@@ -22,6 +22,6 @@ class NumericHasher implements HasherInterface
      */
     public function hash($input)
     {
-        return (float) $input;
+        return (float)$input;
     }
 }

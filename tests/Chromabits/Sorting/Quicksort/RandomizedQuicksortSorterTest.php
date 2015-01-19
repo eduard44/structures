@@ -12,6 +12,18 @@ use Chromabits\Sorting\Quicksort\RandomizedQuicksortSorter;
  */
 class RandomizedQuicksortSorterTest extends QuicksortSorterTest
 {
+    public function testConstructor()
+    {
+        $this->assertInstanceOf(
+            [
+                'Chromabits\Sorting\Quicksort\RandomizedQuicksortSorter',
+                'Chromabits\Sorting\Quicksort\QuicksortSorter',
+                'Chromabits\Sorting\Interfaces\SorterInterface'
+            ],
+            $this->make()
+        );
+    }
+
     protected function make(ComparatorInterface $comparator = null)
     {
         return new RandomizedQuicksortSorter($comparator);

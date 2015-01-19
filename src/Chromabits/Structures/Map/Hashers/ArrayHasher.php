@@ -13,6 +13,7 @@ use Chromabits\Structures\Map\Interfaces\HasherInterface;
  */
 class ArrayHasher implements HasherInterface
 {
+
     /**
      * @var \Chromabits\Structures\Map\Hashers\NaiveStringHasher
      */

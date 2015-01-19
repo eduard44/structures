@@ -9,7 +9,6 @@ use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
 use Chromabits\Structures\LinkedList\Interfaces\LinkedListInterface;
 use IteratorAggregate;
-use Traversable;
 
 /**
  * Class ArrayLinkedList
@@ -20,6 +19,7 @@ use Traversable;
  */
 class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Emptyable, IteratorAggregate, Arrayable
 {
+
     /**
      * @var \Chromabits\Structures\LinkedList\Node[]
      */
@@ -109,7 +109,7 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
 
         $count = 0;
         $current = $this->head;
-        $next  = $current->getNext();
+        $next = $current->getNext();
 
         while (!is_null($next) || $count < 1) {
             if ($count == $index) {
@@ -158,7 +158,7 @@ class ArrayLinkedList implements LinkedListInterface, Flushable, Countable, Empt
     protected function internalRemove($node)
     {
         // Remove the element from the internal array
-        if(($key = array_search($node, $this->nodes)) !== false) {
+        if (($key = array_search($node, $this->nodes)) !== false) {
             unset($this->nodes[$key]);
         }
     }

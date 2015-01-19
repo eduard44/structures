@@ -13,6 +13,7 @@ use Chromabits\Structures\Interfaces\NodeInterface;
  */
 class Node implements NodeInterface
 {
+
     /**
      * The next node in the linked list
      *
@@ -41,16 +42,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * Set reference to the next node in the list
-     *
-     * @param \Chromabits\Structures\LinkedList\Node|null $next
-     */
-    public function setNext($next = null)
-    {
-        $this->next = $next;
-    }
-
-    /**
      * Get the next node
      *
      * @return \Chromabits\Structures\LinkedList\Node|null
@@ -61,13 +52,13 @@ class Node implements NodeInterface
     }
 
     /**
-     * Set the content of the node
+     * Set reference to the next node in the list
      *
-     * @param $content
+     * @param \Chromabits\Structures\LinkedList\Node|null $next
      */
-    public function setContent($content)
+    public function setNext($next = null)
     {
-        $this->content = $content;
+        $this->next = $next;
     }
 
     /**
@@ -78,5 +69,15 @@ class Node implements NodeInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set the content of the node
+     *
+     * @param $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }

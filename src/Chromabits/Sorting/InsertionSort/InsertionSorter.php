@@ -9,6 +9,7 @@ use Chromabits\Sorting\Interfaces\SorterInterface;
 
 class InsertionSorter implements SorterInterface
 {
+
     /**
      * @var \Chromabits\Nucleus\Support\ArrayUtils
      */

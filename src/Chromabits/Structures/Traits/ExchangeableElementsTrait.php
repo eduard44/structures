@@ -25,7 +25,8 @@ trait ExchangeableElementsTrait
         $count = count($elements);
 
         if (($indexA < 0 || $indexA > ($count - 1)) ||
-            $indexB < 0 || $indexB > ($count - 1)) {
+            $indexB < 0 || $indexB > ($count - 1)
+        ) {
             throw new IndexOutOfBoundsException;
         }
 

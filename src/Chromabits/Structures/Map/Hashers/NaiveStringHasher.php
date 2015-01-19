@@ -22,7 +22,7 @@ class NaiveStringHasher implements HasherInterface
      */
     public function hash($input)
     {
-        $input = (string) $input;
+        $input = (string)$input;
 
         $count = 0;
 

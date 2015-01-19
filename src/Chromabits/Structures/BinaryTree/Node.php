@@ -13,6 +13,7 @@ use Chromabits\Structures\Interfaces\NodeInterface;
  */
 class Node implements NodeInterface
 {
+
     /**
      * @var mixed
      */
@@ -40,16 +41,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * Set the content of the node
-     *
-     * @param $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    /**
      * Get the content of the node
      *
      * @return mixed
@@ -57,6 +48,16 @@ class Node implements NodeInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set the content of the node
+     *
+     * @param $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 
     /**

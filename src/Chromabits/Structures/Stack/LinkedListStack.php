@@ -14,6 +14,7 @@ use Chromabits\Structures\Stack\Interfaces\StackInterface;
  */
 abstract class LinkedListStack implements StackInterface
 {
+
     /**
      * Internal linked list
      *

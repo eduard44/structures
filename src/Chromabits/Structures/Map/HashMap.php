@@ -154,7 +154,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
      */
     protected function getLoadFactor()
     {
-        return $this->count() / (float) count($this->buckets);
+        return $this->count() / (float)count($this->buckets);
     }
 
     /**
@@ -193,8 +193,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
         // We will cycle over each bucket before the internal array was
         // resize, go throw each element in the bucket, and internally
         // re-add them into the map
-        foreach ($old as $oldBucket)
-        {
+        foreach ($old as $oldBucket) {
             // If the old bucket is null, the we can skip it completely
             if (is_null($oldBucket)) {
                 continue;
@@ -250,7 +249,7 @@ class HashMap implements MapInterface, Countable, Emptyable, Arrayable
      *
      * @throws \Chromabits\Structures\Exceptions\InvalidOperationException
      */
-    protected function removeFromBucket(ArrayLinkedList$bucket, $key)
+    protected function removeFromBucket(ArrayLinkedList $bucket, $key)
     {
         $index = $this->existsInBucket($bucket, $key);
 

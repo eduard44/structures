@@ -15,6 +15,7 @@ use Iterator;
  */
 class LinkedListIterator implements Iterator
 {
+
     /**
      * Current position of the iterator
      *

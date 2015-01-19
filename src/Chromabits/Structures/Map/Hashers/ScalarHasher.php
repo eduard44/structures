@@ -2,8 +2,8 @@
 
 namespace Chromabits\Structures\Map\Hashers;
 
-use Chromabits\Structures\Map\Interfaces\HasherInterface;
 use Chromabits\Structures\Exceptions\InvalidOperationException;
+use Chromabits\Structures\Map\Interfaces\HasherInterface;
 
 /**
  * Class ScalarHasher
@@ -14,6 +14,7 @@ use Chromabits\Structures\Exceptions\InvalidOperationException;
  */
 class ScalarHasher implements HasherInterface
 {
+
     /**
      * @var \Chromabits\Structures\Map\Hashers\NaiveStringHasher
      */

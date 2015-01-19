@@ -30,16 +30,16 @@ class NodeTest extends TestCase
 
         $this->assertEquals('binary node', $node->getContent());
     }
-    
+
     public function testLeftChildMutators()
     {
         $node = new Node();
         $child = new Node();
-        
+
         $this->assertNull($node->getLeftChild());
-        
+
         $node->setLeftChild($child);
-        
+
         $this->assertEquals($child, $node->getLeftChild());
     }
 

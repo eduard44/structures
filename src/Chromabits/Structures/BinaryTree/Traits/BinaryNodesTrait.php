@@ -25,7 +25,7 @@ trait BinaryNodesTrait
             $index--;
         }
 
-        return (int) floor($index / 2.0);
+        return (int)floor($index / 2.0);
     }
 
     /**

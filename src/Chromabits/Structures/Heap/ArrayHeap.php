@@ -4,11 +4,11 @@ namespace Chromabits\Structures\Heap;
 
 use Chromabits\Structures\BinaryTree\Traits\BinaryNodesTrait;
 use Chromabits\Structures\Exceptions\IndexOutOfBoundsException;
+use Chromabits\Structures\Heap\Interfaces\HeapInterface;
 use Chromabits\Structures\Interfaces\Arrayable;
 use Chromabits\Structures\Interfaces\Countable;
 use Chromabits\Structures\Interfaces\Emptyable;
 use Chromabits\Structures\Interfaces\Flushable;
-use Chromabits\Structures\Heap\Interfaces\HeapInterface;
 use Chromabits\Structures\Traits\ExchangeableElementsTrait;
 
 /**

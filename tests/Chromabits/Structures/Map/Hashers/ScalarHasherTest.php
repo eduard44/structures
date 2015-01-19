@@ -26,7 +26,7 @@ class ScalarHasherTest extends TestCase
 
         $resultOne = $hasher->hash('hello world');
         $resultTwo = $hasher->hash(8759874.7532);
-        $resultThree = $hasher->hash([ 'some' => 'array' ]);
+        $resultThree = $hasher->hash(['some' => 'array']);
 
         $this->assertTrue(is_numeric($resultOne));
         $this->assertTrue(is_numeric($resultTwo));
