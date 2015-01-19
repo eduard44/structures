@@ -6,6 +6,7 @@ A small experiment on data structures in PHP
 
 ### Data Structures
 
+- BinarySearchTree
 - MinHeap
 - MaxHeap
 - LinkedList
