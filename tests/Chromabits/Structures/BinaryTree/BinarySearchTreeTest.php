@@ -98,4 +98,24 @@ class BinarySearchTreeTest extends TestCase
 
         $this->assertTrue($tree->isEmpty());
     }
+
+    public function testPreorder()
+    {
+        $tree = new BinarySearchTree();
+
+        $tree->push(8, 8);
+        $tree->push(3, 3);
+        $tree->push(10, 10);
+        $tree->push(1, 1);
+        $tree->push(6, 6);
+        $tree->push(4, 4);
+        $tree->push(7, 7);
+        $tree->push(14, 14);
+        $tree->push(13, 13);
+
+        $this->assertEquals(
+            [8, 3, 1, 6, 4, 7, 10, 14, 13],
+            $tree->preorder()
+        );
+    }
 }

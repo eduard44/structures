@@ -177,4 +177,41 @@ class BinaryTree implements Countable, Emptyable, Flushable
 
         $this->root = null;
     }
+
+    /**
+     * Return an array with the result of performing a preorder traversal of a
+     * tree.
+     *
+     * @return array
+     */
+    public function preorder()
+    {
+        $result = [];
+
+        $this->preorderTraversal($this->root, $result);
+
+        return $result;
+    }
+
+    /**
+     * Recursive step of preorder traversal.
+     *
+     * @param Node $node
+     * @param array $result
+     */
+    protected function preorderTraversal(Node $node, array &$result)
+    {
+        $result[] = $node->getContent();
+
+        $left = $node->getLeftChild();
+        $right = $node->getRightChild();
+
+        if ($left !== null) {
+            $this->preorderTraversal($left, $result);
+        }
+
+        if ($right !== null) {
+            $this->preorderTraversal($right, $result);
+        }
+    }
 }
